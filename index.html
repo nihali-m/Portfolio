@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Portfolio of Nihali Madhukoulya — Developer, creator, and problem solver. Explore my projects, skills, and experience.">
+    <title>Nihali Madhukoulya | Portfolio ✿</title>
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+    <!-- Floating Decorations -->
+    <div class="floating-deco">🌸</div>
+    <div class="floating-deco">✨</div>
+    <div class="floating-deco">🌙</div>
+    <div class="floating-deco">⭐</div>
+    <div class="floating-deco">🦋</div>
+    <div class="floating-deco">💫</div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-star">✿</span> nihali
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#play" class="nav-link">Play</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">
+                Say Hi 💌
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#skills" class="mobile-nav-link">Skills</a>
+        <a href="#projects" class="mobile-nav-link">Projects</a>
+        <a href="#play" class="mobile-nav-link">Play</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Available for opportunities ☀️
+            </div>
+            <h1 class="hero-title">
+                Hi there, I'm<br>
+                <span class="hero-name">Nihali Madhukoulya</span>
+                <span class="hero-sparkles">✨</span>
+            </h1>
+            <p class="hero-subtitle" id="typedRole">~ building things with love & code ~</p>
+            <p class="hero-description">
+                I craft intelligent systems and beautiful digital experiences.
+                Passionate about AI, machine learning, and creating software
+                that brings a little magic to the world 🌟
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-cute btn-primary">
+                    <span class="btn-emoji">🎨</span>
+                    <span>See My Work</span>
+                </a>
+                <a href="#contact" class="btn-cute btn-secondary">
+                    <span class="btn-emoji">💬</span>
+                    <span>Let's Chat</span>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="10">0</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="5">0</span>
+                    <span class="stat-label">Technologies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2">0</span>
+                    <span class="stat-label">Years Learning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-emoji">🌷</span>
+                <h2 class="section-title">A Little <span class="title-accent">About Me</span></h2>
+                <p class="section-subtitle">nice to meet you!</p>
+            </div>
+            <div class="about-card reveal">
+                <p class="about-text">
+                    I'm a developer with a passion for artificial intelligence and creating impactful software ✨
+                    My journey in tech started with curiosity about how things work, and it evolved into
+                    a deep love for building intelligent systems and beautiful digital experiences.
+                    Whether it's training neural networks, designing user interfaces, or architecting backend
+                    systems — I bring dedication and creativity to everything I do 💛
+                </p>
+                <div class="about-info-grid">
+                    <div class="info-bubble reveal reveal-delay-1">
+                        <span class="bubble-icon">📍</span>
+                        <span class="bubble-label">Location</span>
+                        <span class="bubble-value">India</span>
+                    </div>
+                    <div class="info-bubble reveal reveal-delay-2">
+                        <span class="bubble-icon">🎓</span>
+                        <span class="bubble-label">Education</span>
+                        <span class="bubble-value">Computer Application</span>
+                    </div>
+                    <div class="info-bubble reveal reveal-delay-3">
+                        <span class="bubble-icon">💼</span>
+                        <span class="bubble-label">Focus</span>
+                        <span class="bubble-value">AI / ML</span>
+                    </div>
+                    <div class="info-bubble reveal reveal-delay-4">
+                        <span class="bubble-icon">🌐</span>
+                        <span class="bubble-label">Languages</span>
+                        <span class="bubble-value">English, Hindi, Assamese</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-emoji">🧸</span>
+                <h2 class="section-title">My <span class="title-accent">Skill Garden</span></h2>
+                <p class="section-subtitle">things I love working with</p>
+            </div>
+            <div class="skills-cloud reveal">
+                <!-- AI/ML -->
+                <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Python</span>
+                <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>TensorFlow</span>
+                <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>PyTorch</span>
+                <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Scikit-Learn</span>
+                <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>OpenCV</span>
+                <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>NumPy</span>
+                <span class="skill-pill" data-cat="ai"><span class="skill-dot"></span>Pandas</span>
+                <!-- Web -->
+                <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>HTML5</span>
+                <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>CSS3</span>
+                <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>JavaScript</span>
+                <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>React</span>
+                <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>Node.js</span>
+                <span class="skill-pill" data-cat="web"><span class="skill-dot"></span>FastAPI</span>
+                <!-- Tools -->
+                <span class="skill-pill" data-cat="tools"><span class="skill-dot"></span>Git</span>
+                <span class="skill-pill" data-cat="tools"><span class="skill-dot"></span>Docker</span>
+                <span class="skill-pill" data-cat="tools"><span class="skill-dot"></span>GitHub</span>
+                <span class="skill-pill" data-cat="tools"><span class="skill-dot"></span>VS Code</span>
+                <span class="skill-pill" data-cat="tools"><span class="skill-dot"></span>Linux</span>
+                <span class="skill-pill" data-cat="tools"><span class="skill-dot"></span>Postman</span>
+                <!-- DBs -->
+                <span class="skill-pill" data-cat="db"><span class="skill-dot"></span>PostgreSQL</span>
+                <span class="skill-pill" data-cat="db"><span class="skill-dot"></span>MongoDB</span>
+                <span class="skill-pill" data-cat="db"><span class="skill-dot"></span>SQLite</span>
+                <span class="skill-pill" data-cat="db"><span class="skill-dot"></span>Redis</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-emoji">🎀</span>
+                <h2 class="section-title">Things I've <span class="title-accent">Built</span></h2>
+                <p class="section-subtitle">with love and lots of coffee ☕</p>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <article class="project-card reveal reveal-delay-1">
+                    <div class="project-image">
+                        <div class="project-bg" style="background: linear-gradient(135deg, #C9B1FF, #FFB5C2);"></div>
+                        <span class="project-emoji">📹</span>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-category">AI / Computer Vision</span>
+                        <h3 class="project-title">Multi-Camera Counting System</h3>
+                        <p class="project-description">
+                            Real-time multi-camera people counting with cross-camera re-identification
+                            using YOLOv8, BoT-SORT tracking, and OSNet Re-ID ✨
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">YOLOv8</span>
+                            <span class="project-tag">OpenCV</span>
+                            <span class="project-tag">FastAPI</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                Live Demo →
+                            </a>
+                            <a href="#" class="project-link">
+                                Source →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card reveal reveal-delay-2">
+                    <div class="project-image">
+                        <div class="project-bg" style="background: linear-gradient(135deg, #B5D8FF, #B5EAD7);"></div>
+                        <span class="project-emoji">🔬</span>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-category">Deep Learning</span>
+                        <h3 class="project-title">AI Image Classifier</h3>
+                        <p class="project-description">
+                            Deep learning image classification using transfer learning
+                            with ResNet. Achieves 95%+ accuracy on custom datasets 🎯
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">PyTorch</span>
+                            <span class="project-tag">ResNet</span>
+                            <span class="project-tag">Flask</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                Live Demo →
+                            </a>
+                            <a href="#" class="project-link">
+                                Source →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card reveal reveal-delay-3">
+                    <div class="project-image">
+                        <div class="project-bg" style="background: linear-gradient(135deg, #FFD6E0, #FFCBA4);"></div>
+                        <span class="project-emoji">✅</span>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-category">Full Stack</span>
+                        <h3 class="project-title">Smart Task Manager</h3>
+                        <p class="project-description">
+                            AI-powered task management with smart priority suggestions,
+                            NLP processing, and a cozy responsive dashboard 🌿
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">MongoDB</span>
+                            <span class="project-tag">NLP</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                Live Demo →
+                            </a>
+                            <a href="#" class="project-link">
+                                Source →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-card reveal reveal-delay-4">
+                    <div class="project-image">
+                        <div class="project-bg" style="background: linear-gradient(135deg, #EDE0FF, #D6EBFF);"></div>
+                        <span class="project-emoji">📊</span>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-category">Machine Learning</span>
+                        <h3 class="project-title">Sentiment Analysis Engine</h3>
+                        <p class="project-description">
+                            Real-time sentiment analysis of social media data
+                            with BERT models, visualizing opinion trends 🌈
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">BERT</span>
+                            <span class="project-tag">Streamlit</span>
+                            <span class="project-tag">Plotly</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                Live Demo →
+                            </a>
+                            <a href="#" class="project-link">
+                                Source →
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Play Corner Section -->
+    <section class="section" id="play">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-emoji">🎮</span>
+                <h2 class="section-title">Play <span class="title-accent">Corner</span></h2>
+                <p class="section-subtitle">take a break and have some fun! ✨</p>
+            </div>
+
+            <!-- Game Tabs -->
+            <div class="game-tabs reveal">
+                <button class="game-tab active" data-game="memory">🃏 Memory Match</button>
+                <button class="game-tab" data-game="petals">🌸 Catch Petals</button>
+            </div>
+
+            <!-- GAME 1: Memory Match -->
+            <div class="game-container active" id="game-memory">
+                <div class="game-card reveal">
+                    <div class="game-header">
+                        <div class="game-info">
+                            <span class="game-stat">Moves: <strong id="memoryMoves">0</strong></span>
+                            <span class="game-stat">Pairs: <strong id="memoryPairs">0</strong>/8</span>
+                        </div>
+                        <button class="game-btn" id="memoryReset">
+                            🔄 New Game
+                        </button>
+                    </div>
+                    <div class="memory-grid" id="memoryGrid">
+                        <!-- Cards will be generated by JS -->
+                    </div>
+                    <div class="game-message" id="memoryMessage"></div>
+                </div>
+            </div>
+
+            <!-- GAME 2: Catch the Petals -->
+            <div class="game-container" id="game-petals">
+                <div class="game-card reveal">
+                    <div class="game-header">
+                        <div class="game-info">
+                            <span class="game-stat">Score: <strong id="petalScore">0</strong></span>
+                            <span class="game-stat">Time: <strong id="petalTimer">30</strong>s</span>
+                            <span class="game-stat">Best: <strong id="petalBest">0</strong></span>
+                        </div>
+                        <button class="game-btn" id="petalStart">
+                            🌸 Start!
+                        </button>
+                    </div>
+                    <div class="petals-arena" id="petalsArena">
+                        <div class="petals-message" id="petalsMessage">
+                            Click "Start!" to catch falling petals 🌸<br>
+                            <span style="font-size: 0.85rem; color: var(--text-light);">click them before they
+                                fall!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-emoji">💌</span>
+                <h2 class="section-title">Let's Be <span class="title-accent">Friends</span></h2>
+                <p class="section-subtitle">I'd love to hear from you!</p>
+            </div>
+            <div class="contact-wrapper reveal">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Let's build something<br>wonderful together 🌸</h3>
+                        <p>
+                            Have a project in mind, a question, or just want to say hi?
+                            Drop me a message and I'll get back to you as soon as I can!
+                        </p>
+                        <div class="contact-channels">
+                            <a href="mailto:nmadhukoulya@gmail.com" class="contact-channel">
+                                <div class="channel-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="channel-label">Email</span>
+                                    <span class="channel-value">nmadhukoulya@gmail.com</span>
+                                </div>
+                            </a>
+                            <a href="https://github.com/nihali-m" target="_blank" class="contact-channel">
+                                <div class="channel-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="channel-label">GitHub</span>
+                                    <span class="channel-value">github.com/nihali-m</span>
+                                </div>
+                            </a>
+                            <a href="https://linkedin.com/in/nihali-madhukoulya-098172374/" target="_blank"
+                                class="contact-channel">
+                                <div class="channel-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                        <rect x="2" y="9" width="4" height="12" />
+                                        <circle cx="4" cy="4" r="2" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="channel-label">LinkedIn</span>
+                                    <span class="channel-value">linkedin.com/in/nihali-madhukoulya-098172374/</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-form-wrap">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name ✿" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Your Email 📧" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Write something nice... 💭" rows="5"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                Send with Love 💌
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-social">
+            <a href="https://github.com/nihali-m" target="_blank" aria-label="GitHub" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                </svg>
+            </a>
+            <a href="https://linkedin.com/in/nihali-madhukoulya-098172374/" target="_blank" aria-label="LinkedIn"
+                class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                </svg>
+            </a>
+            <a href="mailto:nmadhukoulya@gmail.com" aria-label="Email" class="social-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                </svg>
+            </a>
+        </div>
+        <p class="footer-text">
+            Made with <span class="heart">♡</span> by Nihali Madhukoulya
+        </p>
+        <p class="footer-copyright">
+            &copy; 2026 ~ all rights reserved ✿
+        </p>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>

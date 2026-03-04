@@ -457,40 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const petalStartBtn = document.getElementById('petalStart');
     if (petalStartBtn) petalStartBtn.addEventListener('click', startPetalGame);
 
-    // ================================================================
-    // MUSIC PLAYER
-    // ================================================================
-    const bgMusic = document.getElementById('bgMusic');
-    const musicToggle = document.getElementById('musicToggle');
-    const musicDisc = document.getElementById('musicDisc');
-    const musicLabel = document.getElementById('musicLabel');
-    let musicPlaying = false;
-
-    if (musicToggle && bgMusic) {
-        bgMusic.volume = 0.3;
-
-        musicToggle.addEventListener('click', () => {
-            if (musicPlaying) {
-                bgMusic.pause();
-                musicToggle.classList.remove('playing');
-                musicDisc.textContent = '🎵';
-                musicLabel.textContent = 'play';
-                musicPlaying = false;
-            } else {
-                bgMusic.play().then(() => {
-                    musicToggle.classList.add('playing');
-                    musicDisc.textContent = '🎶';
-                    musicLabel.textContent = 'on';
-                    musicPlaying = true;
-                }).catch(() => {
-                    // Audio file not found or can't play
-                    musicLabel.textContent = '✗';
-                    setTimeout(() => { musicLabel.textContent = 'play'; }, 1500);
-                });
-            }
-        });
-    }
-
 });
 
 // ================================================================
@@ -660,92 +626,6 @@ window.addEventListener('scroll', () => {
     greeting.textContent = text + ' ' + emoji + ',';
 })();
 
-// ===== 6. PET MASCOT (MOCHI) =====
-(function () {
-    const pet = document.getElementById('petMascot');
-    const body = document.getElementById('petBody');
-    const bubble = document.getElementById('petBubble');
-    if (!pet || !body || !bubble) return;
-
-    const sayings = [
-        'meow~ 🐾', 'you look nice today!', 'keep going! ✨',
-        'take a break? ☕', 'uwu~', '*purrs* 💗', 'have fun! 🎮',
-        'you\'re amazing! 🌈', '*naps* 😴', 'hi friend! 🌸',
-        'explore more! 🗺️', 'stay cozy~ 🧸', 'great taste! 💖'
-    ];
-
-    const faces = ['🐱', '😺', '😸', '😻', '🙀', '😹', '😽'];
-
-    function showBubble(text) {
-        bubble.textContent = text;
-        bubble.classList.add('show');
-        setTimeout(() => bubble.classList.remove('show'), 2500);
-    }
-
-    // Random idle chatter
-    function idleChat() {
-        if (Math.random() > 0.6) {
-            showBubble(sayings[Math.floor(Math.random() * sayings.length)]);
-        }
-        setTimeout(idleChat, 8000 + Math.random() * 12000);
-    }
-    setTimeout(idleChat, 4000);
-
-    // Click reaction
-    pet.addEventListener('click', () => {
-        body.textContent = faces[Math.floor(Math.random() * faces.length)];
-        showBubble(sayings[Math.floor(Math.random() * sayings.length)]);
-        setTimeout(() => { body.textContent = '🐱'; }, 3000);
-    });
-
-    // Say hi on first visit
-    setTimeout(() => showBubble('welcome! 🌸'), 2500);
-})();
-
-// ===== 7. FORTUNE COOKIE =====
-(function () {
-    const btn = document.getElementById('fortuneBtn');
-    const popup = document.getElementById('fortunePopup');
-    const text = document.getElementById('fortuneText');
-    const close = document.getElementById('fortuneClose');
-    if (!btn || !popup || !text || !close) return;
-
-    const fortunes = [
-        '🌸 Something beautiful is about to happen.',
-        '✨ Your next project will be your best one yet.',
-        '🦋 Growth happens outside your comfort zone.',
-        '💖 Someone is inspired by your work right now.',
-        '🌈 The best code is the code that makes people smile.',
-        '⭐ You\'re closer to your goals than you think.',
-        '🎀 Creativity is your superpower — never forget that.',
-        '🌷 Take a moment to appreciate how far you\'ve come.',
-        '🍰 Good things come to those who debug patiently.',
-        '💎 Your portfolio just made someone\'s day brighter.',
-        '🌙 Rest is productive too. You deserve it.',
-        '🔮 A wonderful opportunity is heading your way.',
-        '🎵 The rhythm of your work creates harmony.',
-        '🐱 Mochi says: you\'re purrfect!',
-        '🌻 Plant seeds of kindness — they always bloom.'
-    ];
-
-    let isOpen = false;
-
-    btn.addEventListener('click', () => {
-        if (isOpen) {
-            popup.classList.remove('show');
-            isOpen = false;
-            return;
-        }
-        text.textContent = fortunes[Math.floor(Math.random() * fortunes.length)];
-        popup.classList.add('show');
-        isOpen = true;
-    });
-
-    close.addEventListener('click', () => {
-        popup.classList.remove('show');
-        isOpen = false;
-    });
-})();
 
 // ===== 8. CLICK-TO-BLOOM =====
 (function () {
@@ -756,7 +636,7 @@ window.addEventListener('scroll', () => {
         // Don't bloom on interactive elements
         const tag = e.target.tagName;
         if (['BUTTON', 'A', 'INPUT', 'TEXTAREA', 'SELECT', 'CANVAS'].includes(tag)) return;
-        if (e.target.closest('button, a, input, textarea, .game-card, .pet-mascot, .fortune-btn, .fortune-popup, .music-toggle, .navbar')) return;
+        if (e.target.closest('button, a, input, textarea, .game-card, .navbar')) return;
 
         // Throttle — max 1 bloom per 200ms
         const now = Date.now();

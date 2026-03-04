@@ -457,4 +457,192 @@ document.addEventListener('DOMContentLoaded', () => {
     const petalStartBtn = document.getElementById('petalStart');
     if (petalStartBtn) petalStartBtn.addEventListener('click', startPetalGame);
 
+    // ================================================================
+    // MUSIC PLAYER
+    // ================================================================
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicDisc = document.getElementById('musicDisc');
+    const musicLabel = document.getElementById('musicLabel');
+    let musicPlaying = false;
+
+    if (musicToggle && bgMusic) {
+        bgMusic.volume = 0.3;
+
+        musicToggle.addEventListener('click', () => {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicToggle.classList.remove('playing');
+                musicDisc.textContent = '🎵';
+                musicLabel.textContent = 'play';
+                musicPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicToggle.classList.add('playing');
+                    musicDisc.textContent = '🎶';
+                    musicLabel.textContent = 'on';
+                    musicPlaying = true;
+                }).catch(() => {
+                    // Audio file not found or can't play
+                    musicLabel.textContent = '✗';
+                    setTimeout(() => { musicLabel.textContent = 'play'; }, 1500);
+                });
+            }
+        });
+    }
+
 });
+
+// ================================================================
+// ENHANCEMENTS (outside DOMContentLoaded for performance)
+// ================================================================
+
+// ===== 1. LOADING SCREEN =====
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loadingScreen');
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            setTimeout(() => loader.remove(), 600);
+        }, 1200);
+    }
+});
+
+// ===== 2. SCROLL PROGRESS BAR =====
+window.addEventListener('scroll', () => {
+    const progressBar = document.getElementById('scrollProgress');
+    if (!progressBar) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+});
+
+// ===== 3. SPARKLE CURSOR TRAIL =====
+(function () {
+    const canvas = document.getElementById('sparkleCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouseX = 0, mouseY = 0;
+    let animating = true;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const colors = ['#FFB5C2', '#D4B5FF', '#B5EAD7', '#FFCBA4', '#B5D8FF', '#F48FB1'];
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Spawn 1-2 particles per move
+        for (let i = 0; i < 1 + Math.random(); i++) {
+            particles.push({
+                x: mouseX + (Math.random() - 0.5) * 10,
+                y: mouseY + (Math.random() - 0.5) * 10,
+                size: Math.random() * 3 + 1.5,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                vx: (Math.random() - 0.5) * 1.5,
+                vy: (Math.random() - 0.5) * 1.5 - 0.5,
+                life: 1,
+                decay: 0.015 + Math.random() * 0.02,
+                shape: Math.random() > 0.5 ? 'circle' : 'star'
+            });
+        }
+        // Limit particles
+        if (particles.length > 80) particles = particles.slice(-80);
+    });
+
+    function drawStar(cx, cy, size, color, alpha) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+            const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2;
+            const r = i === 0 ? size : size;
+            const method = i === 0 ? 'moveTo' : 'lineTo';
+            ctx[method](cx + Math.cos(angle) * size, cy + Math.sin(angle) * size);
+            const innerAngle = angle + (2 * Math.PI) / 10;
+            ctx.lineTo(cx + Math.cos(innerAngle) * (size * 0.4), cy + Math.sin(innerAngle) * (size * 0.4));
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function animate() {
+        if (!animating) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= p.decay;
+            p.size *= 0.99;
+
+            if (p.life <= 0) {
+                particles.splice(i, 1);
+                return;
+            }
+
+            if (p.shape === 'star') {
+                drawStar(p.x, p.y, p.size, p.color, p.life);
+            } else {
+                ctx.globalAlpha = p.life;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        });
+
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Pause when tab is hidden
+    document.addEventListener('visibilitychange', () => {
+        animating = !document.hidden;
+        if (animating) animate();
+    });
+})();
+
+// ===== 4. EASTER EGG — Type "cute" for confetti! =====
+(function () {
+    let typed = '';
+    const secret = 'cute';
+
+    document.addEventListener('keydown', (e) => {
+        typed += e.key.toLowerCase();
+        if (typed.length > secret.length) {
+            typed = typed.slice(-secret.length);
+        }
+        if (typed === secret) {
+            typed = '';
+            launchConfetti();
+        }
+    });
+
+    function launchConfetti() {
+        const emojis = ['🌸', '⭐', '✨', '💖', '🦋', '🎀', '🌈', '🍰', '💎', '🌷', '🎵', '🌙'];
+        for (let i = 0; i < 40; i++) {
+            const el = document.createElement('div');
+            el.className = 'confetti-piece';
+            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.top = -20 + 'px';
+            el.style.fontSize = (0.8 + Math.random() * 1.5) + 'rem';
+            el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+            el.style.animationDelay = (Math.random() * 0.5) + 's';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 4000);
+        }
+    }
+})();

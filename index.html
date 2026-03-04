@@ -7,10 +7,26 @@
     <meta name="description"
         content="Portfolio of Nihali Madhukoulya — Developer, creator, and problem solver. Explore my projects, skills, and experience.">
     <title>Nihali Madhukoulya | Portfolio ✿</title>
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-content">
+            <div class="loader-emoji">🌸</div>
+            <div class="loader-dots">
+                <span></span><span></span><span></span>
+            </div>
+            <p class="loader-text">loading something cute...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Sparkle Cursor Trail -->
+    <canvas class="sparkle-canvas" id="sparkleCanvas"></canvas>
     <!-- Floating Decorations -->
     <div class="floating-deco">🌸</div>
     <div class="floating-deco">✨</div>
@@ -481,7 +497,16 @@
         </p>
     </footer>
 
-    <script src="script.js?v=2"></script>
+    <!-- Music Player -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="bgm.mp3" type="audio/mpeg">
+    </audio>
+    <button class="music-toggle" id="musicToggle" aria-label="Toggle music" title="Play some cozy tunes 🎵">
+        <span class="music-disc" id="musicDisc">🎵</span>
+        <span class="music-label" id="musicLabel">play</span>
+    </button>
+
+    <script src="script.js?v=4"></script>
 </body>
 
 </html>

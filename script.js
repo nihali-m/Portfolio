@@ -653,3 +653,234 @@ window.addEventListener('scroll', () => {
         setTimeout(() => bloom.remove(), 1000);
     });
 })();
+
+// ===== 9. HACKER MODE =====
+(function () {
+    const toggle = document.getElementById('hackerToggle');
+    const canvas = document.getElementById('matrixRain');
+    if (!toggle || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let isHacker = false;
+    let animId = null;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+    const fontSize = 14;
+    let columns, drops;
+
+    function initDrops() {
+        columns = Math.floor(canvas.width / fontSize);
+        drops = new Array(columns).fill(1);
+    }
+    initDrops();
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#00FF41';
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            ctx.globalAlpha = 0.4 + Math.random() * 0.6;
+            ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+        ctx.globalAlpha = 1;
+        animId = requestAnimationFrame(drawMatrix);
+    }
+
+    toggle.addEventListener('click', () => {
+        isHacker = !isHacker;
+        document.body.classList.toggle('hacker-mode', isHacker);
+        if (isHacker) {
+            initDrops();
+            drawMatrix();
+        } else {
+            if (animId) cancelAnimationFrame(animId);
+            animId = null;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    });
+})();
+
+// ===== 10. AI CHATBOT =====
+(function () {
+    const trigger = document.getElementById('chatTrigger');
+    const chatWin = document.getElementById('chatWindow');
+    const closeBtn = document.getElementById('chatClose');
+    const msgArea = document.getElementById('chatMessages');
+    const input = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('chatSend');
+    if (!trigger || !chatWin || !msgArea || !input || !sendBtn) return;
+
+    const responses = {
+        greetings: {
+            patterns: ['hi', 'hello', 'hey', 'sup', 'yo', 'hola', 'howdy'],
+            replies: [
+                'Hey there! 👋 I\'m NihaliBot. What would you like to know about Nihali?',
+                'Hello! 😊 Ask me about skills, projects, experience, or anything else!',
+                'Hi! 🌸 I can tell you about Nihali\'s work, skills, or how to get in touch!'
+            ]
+        },
+        skills: {
+            patterns: ['skill', 'tech', 'stack', 'language', 'tool', 'programming', 'framework'],
+            replies: [
+                '💻 Nihali is skilled in:\n\n• Python, JavaScript, HTML/CSS\n• Machine Learning & Deep Learning\n• TensorFlow, PyTorch, OpenCV\n• React, Node.js\n• Git, Docker\n• Problem solving & creative coding!',
+                '🛠️ Tech stack: Python, JS, ML/DL frameworks (TensorFlow, PyTorch), web dev (HTML/CSS/JS, React), computer vision (OpenCV), and more!'
+            ]
+        },
+        projects: {
+            patterns: ['project', 'portfolio', 'built', 'create', 'made', 'build'],
+            replies: [
+                '🎨 Some of Nihali\'s projects include:\n\n• AI & ML research projects\n• Computer Vision applications\n• Creative web experiences (like this portfolio!)\n• Interactive games & tools\n\nScroll down to the Projects section! ⬇️',
+                '🚀 Nihali has 10+ projects spanning AI, machine learning, web development, and creative coding. Check the Projects section!'
+            ]
+        },
+        experience: {
+            patterns: ['experience', 'job', 'intern', 'career', 'professional', 'work'],
+            replies: [
+                '📈 Nihali is an AI enthusiast and creative developer with 2+ years of learning experience. Passionate about intelligent systems and beautiful digital experiences!',
+                '🌟 Currently focused on AI/ML projects and creative development. Always learning, always building!'
+            ]
+        },
+        education: {
+            patterns: ['education', 'study', 'university', 'college', 'degree', 'school'],
+            replies: [
+                '🎓 Nihali is pursuing Computer Science/AI, with a strong focus on machine learning and deep learning. Self-taught in web development!',
+                '📚 Studying CS with a focus on AI & ML. A lifelong learner who believes in learning by building!'
+            ]
+        },
+        contact: {
+            patterns: ['contact', 'reach', 'email', 'hire', 'message', 'connect'],
+            replies: [
+                '📬 You can reach Nihali through:\n\n• The contact form below ⬇️\n• GitHub: github.com/nihali-m\n• Or scroll to the Contact section!\n\nAlways happy to connect! 💌',
+                '✉️ Head to the Contact section to send a message, or visit the GitHub profile!'
+            ]
+        },
+        ai: {
+            patterns: ['ai', 'artificial intelligence', 'machine learning', 'deep learning', 'neural', 'ml', 'model'],
+            replies: [
+                '🤖 AI is Nihali\'s passion!\n\n• Computer Vision & Image Processing\n• Natural Language Processing\n• Deep Learning architectures\n• ML model optimization\n• Real-world AI applications',
+                '🧠 Nihali is deeply passionate about AI — from training neural networks to building computer vision systems!'
+            ]
+        },
+        hobbies: {
+            patterns: ['hobby', 'free time', 'interest', 'enjoy', 'passion', 'fun'],
+            replies: [
+                '🌈 Beyond coding, Nihali enjoys:\n\n• Creative design & digital art\n• Exploring new technologies\n• Building fun interactive projects\n• Gaming & anime\n• Making things cute and cozy ✨',
+                '😊 Nihali loves turning boring tech into beautiful, fun experiences — like this portfolio!'
+            ]
+        },
+        cute: {
+            patterns: ['cute', 'kawaii', 'cozy', 'pretty', 'beautiful', 'design', 'aesthetic'],
+            replies: [
+                '🌸 Glad you noticed! This portfolio has a "cozy kawaii" theme — pastel colors, floating decorations, and lots of love! ✨',
+                '💖 The cute design is intentional! Try clicking around — there are hidden surprises!'
+            ]
+        },
+        hacker: {
+            patterns: ['hacker', 'matrix', 'hack', 'terminal', 'dark'],
+            replies: [
+                '⌨️ Click the keyboard button (bottom-left) to toggle the Matrix theme! 😎',
+                '🖥️ Try the hacker mode toggle (⌨️ bottom-left) — green text, falling code, scanlines!'
+            ]
+        },
+        games: {
+            patterns: ['game', 'play', 'memory', 'petal', 'mini-game'],
+            replies: [
+                '🎮 There are mini-games in the Play Corner!\n\n• 🃏 Memory Match — flip cards to find pairs\n• 🌸 Catch the Petals — catch falling flowers!\n\nScroll to the Play section to try them!',
+                '🕹️ Check out the Play Corner! Memory matching and petal-catching games. Can you beat the high score? 🏆'
+            ]
+        },
+        thanks: {
+            patterns: ['thank', 'thanks', 'thx', 'appreciate', 'helpful'],
+            replies: [
+                'You\'re welcome! 💖 Feel free to ask anything else!',
+                'Happy to help! 😊 Check out the Contact section to reach Nihali!',
+                'Aw, thanks! 🌸 Try the easter egg — type "cute" anywhere on the page! 🤫'
+            ]
+        },
+        bye: {
+            patterns: ['bye', 'goodbye', 'see you', 'later', 'cya'],
+            replies: [
+                'Bye! 👋 Thanks for visiting! Star the GitHub repo! ⭐',
+                'See you later! 🌸 Hope you enjoyed the portfolio!',
+                'Goodbye! 💖 Come back anytime!'
+            ]
+        }
+    };
+
+    const fallbacks = [
+        'Hmm, I\'m not sure about that! Try asking about skills, projects, or contact info 😊',
+        'Good question! Try: "What are your skills?" or "Tell me about your projects" 🤖',
+        'I\'m a simple bot 😅 — I know about skills, projects, education, and contact info!'
+    ];
+
+    function findResponse(text) {
+        const lower = text.toLowerCase().trim();
+        for (const cat of Object.values(responses)) {
+            for (const p of cat.patterns) {
+                if (lower.includes(p)) {
+                    return cat.replies[Math.floor(Math.random() * cat.replies.length)];
+                }
+            }
+        }
+        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    }
+
+    function addMsg(text, type) {
+        const div = document.createElement('div');
+        div.className = 'chat-msg ' + type;
+        const span = document.createElement('span');
+        span.className = 'chat-msg-text';
+        span.textContent = text;
+        div.appendChild(span);
+        msgArea.appendChild(div);
+        msgArea.scrollTop = msgArea.scrollHeight;
+    }
+
+    function showTyping() {
+        const t = document.createElement('div');
+        t.className = 'chat-typing';
+        t.id = 'chatTyping';
+        t.innerHTML = '<span></span><span></span><span></span>';
+        msgArea.appendChild(t);
+        msgArea.scrollTop = msgArea.scrollHeight;
+    }
+
+    function send() {
+        const text = input.value.trim();
+        if (!text) return;
+        addMsg(text, 'user');
+        input.value = '';
+        showTyping();
+        setTimeout(() => {
+            const typing = document.getElementById('chatTyping');
+            if (typing) typing.remove();
+            addMsg(findResponse(text), 'bot');
+        }, 600 + Math.random() * 800);
+    }
+
+    trigger.addEventListener('click', () => {
+        chatWin.classList.add('open');
+        trigger.classList.add('hidden');
+        input.focus();
+    });
+
+    closeBtn.addEventListener('click', () => {
+        chatWin.classList.remove('open');
+        trigger.classList.remove('hidden');
+    });
+
+    sendBtn.addEventListener('click', send);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
+})();

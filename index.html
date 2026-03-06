@@ -7,7 +7,7 @@
     <meta name="description"
         content="Portfolio of Nihali Madhukoulya — Developer, creator, and problem solver. Explore my projects, skills, and experience.">
     <title>Nihali Madhukoulya | Portfolio ✿</title>
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 
 <body>
@@ -497,7 +497,39 @@
         </p>
     </footer>
 
-    <script src="script.js?v=6"></script>
+    <!-- Hacker Mode -->
+    <canvas class="matrix-rain" id="matrixRain"></canvas>
+    <button class="hacker-toggle" id="hackerToggle" title="Toggle Hacker Mode ⌨️">
+        <span class="hacker-icon">⌨️</span>
+    </button>
+
+    <!-- AI Chatbot -->
+    <button class="chat-trigger" id="chatTrigger" title="Chat with me! 💬">
+        <span class="chat-trigger-icon">💬</span>
+        <span class="chat-trigger-pulse"></span>
+    </button>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span class="chat-header-avatar">🤖</span>
+            <div class="chat-header-info">
+                <span class="chat-header-name">NihaliBot</span>
+                <span class="chat-header-status">online</span>
+            </div>
+            <button class="chat-close" id="chatClose">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+                <span class="chat-msg-text">Hi! 👋 I'm NihaliBot. Ask me anything about Nihali — skills, projects,
+                    experience, or just say hi!</span>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off">
+            <button class="chat-send" id="chatSend">→</button>
+        </div>
+    </div>
+
+    <script src="script.js?v=8"></script>
 </body>
 
 </html>

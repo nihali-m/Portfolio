@@ -884,3 +884,243 @@ window.addEventListener('scroll', () => {
     sendBtn.addEventListener('click', send);
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
 })();
+
+// ===== 11. HACKER GAME TABS =====
+(function () {
+    document.querySelectorAll('.hacker-games .game-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const parent = tab.closest('.hacker-games');
+            parent.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+            parent.querySelectorAll('.game-container').forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            const target = document.getElementById('game-' + tab.dataset.game);
+            if (target) target.classList.add('active');
+        });
+    });
+})();
+
+// ===== 12. SPEED TYPER =====
+(function () {
+    const prompt = document.getElementById('typerPrompt');
+    const input = document.getElementById('typerInput');
+    const resetBtn = document.getElementById('typerReset');
+    const wpmEl = document.getElementById('typerWpm');
+    const timeEl = document.getElementById('typerTime');
+    const bestEl = document.getElementById('typerBest');
+    const statsEl = document.getElementById('typerStats');
+    if (!prompt || !input || !resetBtn) return;
+
+    const snippets = [
+        'const server = http.createServer();',
+        'for (let i = 0; i < arr.length; i++)',
+        'function hack(target) { return true; }',
+        'if (access === "granted") unlock();',
+        'const data = await fetch(api_url);',
+        'while (running) { process(next); }',
+        'export default class Matrix extends GL',
+        'npm install --save express cors dotenv',
+        'git push origin main --force',
+        'docker build -t myapp:latest .',
+        'SELECT * FROM users WHERE role = admin',
+        'chmod 777 /var/www/html/index.php',
+        'ssh root@192.168.1.1 -p 2222',
+        'python3 -m venv .env && source activate',
+        'curl -X POST https://api.hack/decrypt'
+    ];
+
+    let currentText = '';
+    let startTime = null;
+    let timerInterval = null;
+    let bestWpm = parseInt(localStorage.getItem('typerBest') || '0');
+    let finished = false;
+
+    bestEl.textContent = bestWpm;
+
+    function newGame() {
+        currentText = snippets[Math.floor(Math.random() * snippets.length)];
+        finished = false;
+        startTime = null;
+        clearInterval(timerInterval);
+        wpmEl.textContent = '0';
+        timeEl.textContent = '0';
+        statsEl.textContent = '';
+        input.value = '';
+        input.disabled = false;
+        input.focus();
+        renderPrompt('');
+    }
+
+    function renderPrompt(typed) {
+        let html = '';
+        for (let i = 0; i < currentText.length; i++) {
+            if (i < typed.length) {
+                if (typed[i] === currentText[i]) {
+                    html += '<span class="correct">' + escHtml(currentText[i]) + '</span>';
+                } else {
+                    html += '<span class="incorrect">' + escHtml(currentText[i]) + '</span>';
+                }
+            } else if (i === typed.length) {
+                html += '<span class="current">' + escHtml(currentText[i]) + '</span>';
+            } else {
+                html += escHtml(currentText[i]);
+            }
+        }
+        prompt.innerHTML = html;
+    }
+
+    function escHtml(c) {
+        return c.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/ /g, '&nbsp;');
+    }
+
+    function calcWpm() {
+        if (!startTime) return 0;
+        const minutes = (Date.now() - startTime) / 60000;
+        if (minutes === 0) return 0;
+        const words = input.value.length / 5;
+        return Math.round(words / minutes);
+    }
+
+    input.addEventListener('input', () => {
+        if (finished) return;
+        const typed = input.value;
+
+        if (!startTime && typed.length > 0) {
+            startTime = Date.now();
+            timerInterval = setInterval(() => {
+                timeEl.textContent = ((Date.now() - startTime) / 1000).toFixed(1);
+                wpmEl.textContent = calcWpm();
+            }, 200);
+        }
+
+        renderPrompt(typed);
+
+        // Check completion
+        if (typed.length >= currentText.length) {
+            finished = true;
+            clearInterval(timerInterval);
+            input.disabled = true;
+            const finalWpm = calcWpm();
+            const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+            const correct = typed.split('').filter((c, i) => c === currentText[i]).length;
+            const accuracy = Math.round((correct / currentText.length) * 100);
+
+            wpmEl.textContent = finalWpm;
+            timeEl.textContent = elapsed;
+            statsEl.textContent = '✅ Done! ' + accuracy + '% accuracy | ' + finalWpm + ' WPM';
+
+            if (finalWpm > bestWpm) {
+                bestWpm = finalWpm;
+                bestEl.textContent = bestWpm;
+                localStorage.setItem('typerBest', bestWpm);
+                statsEl.textContent += ' 🏆 New best!';
+            }
+        }
+    });
+
+    resetBtn.addEventListener('click', newGame);
+})();
+
+// ===== 13. CRACK THE CODE =====
+(function () {
+    const guessesEl = document.getElementById('crackerGuesses');
+    const input = document.getElementById('crackerInput');
+    const guessBtn = document.getElementById('crackerGuess');
+    const resetBtn = document.getElementById('crackerReset');
+    const attemptsEl = document.getElementById('crackerAttempts');
+    const bestEl = document.getElementById('crackerBest');
+    const msgEl = document.getElementById('crackerMsg');
+    if (!guessesEl || !input || !guessBtn || !resetBtn) return;
+
+    let secret = '';
+    let attempts = 0;
+    let gameOver = false;
+    let bestScore = localStorage.getItem('crackerBest') || '-';
+
+    bestEl.textContent = bestScore;
+
+    function newGame() {
+        secret = '';
+        for (let i = 0; i < 4; i++) secret += Math.floor(Math.random() * 10);
+        attempts = 0;
+        gameOver = false;
+        attemptsEl.textContent = '0';
+        guessesEl.innerHTML = '';
+        msgEl.textContent = '';
+        msgEl.className = 'cracker-msg';
+        input.value = '';
+        input.focus();
+    }
+
+    function checkGuess() {
+        if (gameOver) return;
+        const guess = input.value.trim();
+        if (guess.length !== 4 || !/^\d{4}$/.test(guess)) {
+            msgEl.textContent = 'Enter exactly 4 digits!';
+            msgEl.className = 'cracker-msg';
+            return;
+        }
+
+        attempts++;
+        attemptsEl.textContent = attempts;
+        input.value = '';
+
+        // Calculate feedback
+        const feedback = [];
+        const secretArr = secret.split('');
+        const guessArr = guess.split('');
+        const used = [false, false, false, false];
+
+        // First pass: exact matches
+        for (let i = 0; i < 4; i++) {
+            if (guessArr[i] === secretArr[i]) {
+                feedback[i] = '🟢';
+                used[i] = true;
+                guessArr[i] = null;
+            }
+        }
+
+        // Second pass: wrong position
+        for (let i = 0; i < 4; i++) {
+            if (guessArr[i] === null) continue;
+            let found = false;
+            for (let j = 0; j < 4; j++) {
+                if (!used[j] && guessArr[i] === secretArr[j]) {
+                    feedback[i] = '🟡';
+                    used[j] = true;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) feedback[i] = '⚫';
+        }
+
+        // Render row
+        const row = document.createElement('div');
+        row.className = 'cracker-guess-row';
+        row.innerHTML = '<span class="cracker-guess-num">' + guess + '</span><span class="cracker-guess-feedback">' + feedback.join('') + '</span>';
+        guessesEl.appendChild(row);
+        guessesEl.scrollTop = guessesEl.scrollHeight;
+
+        // Check win/lose
+        if (guess === secret) {
+            gameOver = true;
+            msgEl.textContent = '🎉 Cracked it in ' + attempts + ' attempts!';
+            msgEl.className = 'cracker-msg win';
+            if (bestScore === '-' || attempts < parseInt(bestScore)) {
+                bestScore = attempts;
+                bestEl.textContent = bestScore;
+                localStorage.setItem('crackerBest', bestScore);
+                msgEl.textContent += ' 🏆 New best!';
+            }
+        } else if (attempts >= 8) {
+            gameOver = true;
+            msgEl.textContent = '💀 Game over! The code was ' + secret;
+            msgEl.className = 'cracker-msg lose';
+        }
+    }
+
+    guessBtn.addEventListener('click', checkGuess);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkGuess(); });
+    resetBtn.addEventListener('click', newGame);
+    newGame();
+})();

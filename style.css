@@ -2258,3 +2258,224 @@ body.hacker-mode .chat-send {
         height: 42px;
     }
 }
+
+/* ===== HACKER GAME SWAP ===== */
+.hacker-games {
+    display: none;
+}
+
+.cute-games {
+    display: block;
+}
+
+body.hacker-mode .hacker-games {
+    display: block;
+}
+
+body.hacker-mode .cute-games {
+    display: none;
+}
+
+/* ===== SPEED TYPER ===== */
+.typer-area {
+    padding: 16px;
+}
+
+.typer-prompt {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    background: var(--warm-white);
+    border: 1px solid rgba(212, 181, 255, 0.2);
+    margin-bottom: 12px;
+    min-height: 60px;
+    letter-spacing: 0.5px;
+}
+
+body.hacker-mode .typer-prompt {
+    background: rgba(0, 20, 0, 0.6) !important;
+    border-color: rgba(0, 255, 65, 0.2) !important;
+    color: #00FF41 !important;
+}
+
+.typer-prompt .correct {
+    color: #4CAF50;
+}
+
+.typer-prompt .incorrect {
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.1);
+    border-radius: 2px;
+}
+
+.typer-prompt .current {
+    border-bottom: 2px solid var(--lavender);
+}
+
+body.hacker-mode .typer-prompt .correct {
+    color: #00FF41 !important;
+}
+
+body.hacker-mode .typer-prompt .incorrect {
+    color: #ff4444 !important;
+    background: rgba(255, 0, 0, 0.15) !important;
+}
+
+body.hacker-mode .typer-prompt .current {
+    border-color: #00FF41 !important;
+}
+
+.typer-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    border: 2px solid rgba(212, 181, 255, 0.3);
+    border-radius: var(--radius-md);
+    background: white;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.typer-input:focus {
+    border-color: var(--lavender);
+}
+
+.typer-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+body.hacker-mode .typer-input {
+    background: rgba(0, 20, 0, 0.8) !important;
+    border-color: rgba(0, 255, 65, 0.3) !important;
+    color: #00FF41 !important;
+}
+
+.typer-stats {
+    margin-top: 10px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    text-align: center;
+}
+
+body.hacker-mode .typer-stats {
+    color: #00FF41 !important;
+}
+
+/* ===== CRACK THE CODE ===== */
+.cracker-area {
+    padding: 16px;
+}
+
+.cracker-desc {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    margin-bottom: 8px;
+}
+
+.cracker-legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+.cracker-guesses {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.cracker-guess-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--warm-white);
+    border: 1px solid rgba(212, 181, 255, 0.15);
+}
+
+body.hacker-mode .cracker-guess-row {
+    background: rgba(0, 20, 0, 0.5) !important;
+    border-color: rgba(0, 255, 65, 0.15) !important;
+}
+
+.cracker-guess-num {
+    font-weight: 700;
+    letter-spacing: 3px;
+    min-width: 60px;
+}
+
+.cracker-guess-feedback {
+    display: flex;
+    gap: 4px;
+    font-size: 0.9rem;
+}
+
+.cracker-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.cracker-input {
+    flex: 1;
+    padding: 10px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    text-align: center;
+    border: 2px solid rgba(212, 181, 255, 0.3);
+    border-radius: var(--radius-md);
+    background: white;
+    color: var(--text-dark);
+    outline: none;
+}
+
+.cracker-input:focus {
+    border-color: var(--lavender);
+}
+
+body.hacker-mode .cracker-input {
+    background: rgba(0, 20, 0, 0.8) !important;
+    border-color: rgba(0, 255, 65, 0.3) !important;
+    color: #00FF41 !important;
+}
+
+.cracker-msg {
+    margin-top: 10px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.cracker-msg.win {
+    color: #4CAF50;
+}
+
+.cracker-msg.lose {
+    color: #f44336;
+}
+
+body.hacker-mode .cracker-msg.win {
+    color: #00FF41 !important;
+}
+
+body.hacker-mode .cracker-msg.lose {
+    color: #ff4444 !important;
+}
